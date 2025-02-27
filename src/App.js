@@ -2,20 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 
-function App() {
+function App({ id }) {
 
   useEffect(() => {
-    console.log("micro app");
+    console.log("micro app mounted");
 
     return () => {
-      console.log("micro app unmount");
+      console.log("micro app unmounted");
     }
   }, [])
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {id ?
+          <img src={"http://localhost:3000/" + logo} className="App-logo" alt="logo" /> :
+          <img src={logo} className="App-logo" alt="logo" />
+        }
+        
         <p>
           Micro app.
         </p>

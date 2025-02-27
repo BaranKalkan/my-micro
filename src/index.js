@@ -3,25 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const root = ReactDOM.createRoot(document.getElementById(document.currentScript.attributes["data-id"].value));
 root.render(
   <React.StrictMode>
-    <App />
+    <App id={document.currentScript.attributes["data-id"].value} />
   </React.StrictMode>
 );
-
-let uniqueKey = -1;
-
-let messageHandler = (event) => {
-  if(event.data.type === "mount")
-  {
-    uniqueKey = event.data.id;
-  }
-  else if(event.data.type === "unmount" && uniqueKey === event.data.id)  
-  {
-    root.unmount();
-    window.removeEventListener("message", messageHandler)
-  }
-}
-
-window.addEventListener("message", messageHandler)
